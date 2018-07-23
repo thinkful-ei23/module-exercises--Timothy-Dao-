@@ -1,8 +1,8 @@
-/* global $, cuid, Item */
+/* global $, Item, cuid,  */
 
 // eslint-disable-next-line no-unused-vars
 
-const store = (function() {
+const store = (function () {
 
   let items = [
     { id: cuid(), name: 'apples', checked: false },
@@ -13,40 +13,45 @@ const store = (function() {
   let hideCheckedItems = false;
   let searchTerm = '';
 
-  let findById = function(id) {
-    this.items.find(item => store.item.id);
+  let findById = function (id) {
+
+
+
+    return this.items.find(item => item.id === id);
+
   };
 
-  const addItem = function(name) {
+  const addItem = function (name) {
     try {
       Item.validateName(name);
       this.items.push(Item.create(name));
-    } catch(error) {
+    } catch (error) {
       console.log('Cannot add item: ' + error.message);
     }
   };
 
-  const findAndToggleChecked = function(id) {
-    let foundItem = this.items.findById(id);  
-    console.log(foundItem);
+  const findAndToggleChecked = function (id) {
+    let foundItem = this.findById(id);
     foundItem.checked = !foundItem.checked; // this is wrong
   };
 
-  const findAndUpdateName = function(id, newName) {
-    try{
+  const findAndUpdateName = function (id, newName) {
+    try {
       Item.validateName(newName);
       findById(id).addItem(newName);
-    } catch(error) {
+    } catch (error) {
       console.log(`Cannot update name: ${error.message}`);
     }
   };
 
-  const findAndDelete = function(id) {
-    const itemIndex = this.items.findById(id); 
+  const findAndDelete = function (id) {
+    
+    const itemIndex = this.items.findIndex(item => item.id === id);
     this.items.splice(itemIndex, 1);
+    console.log('index:', itemIndex);
 
     // this.items.filter(item => item.id === id);
-   
+
   };
 
 
@@ -61,5 +66,5 @@ const store = (function() {
     findAndDelete
   };
 
-}() 
+}()
 );
