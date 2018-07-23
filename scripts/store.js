@@ -1,4 +1,4 @@
-/* global $, cuid, Item */
+/* global $, Item, cuid,  */
 
 // eslint-disable-next-line no-unused-vars
 
@@ -14,9 +14,9 @@ const store = (function() {
   let searchTerm = '';
 
   let findById = function(id) {
-    this.items.find(item => item.id);
+    return this.items.find(item => item.id === id);
   };
-
+  
   const addItem = function(name) {
     try {
       Item.validateName(name);
@@ -27,8 +27,7 @@ const store = (function() {
   };
 
   const findAndToggleChecked = function(id) {
-    let foundItem = this.items.findById(id);  
-    console.log(foundItem);
+    let foundItem = this.findById(id); 
     foundItem.checked = !foundItem.checked; // this is wrong
   };
 
@@ -42,11 +41,12 @@ const store = (function() {
   };
 
   const findAndDelete = function(id) {
-    const itemIndex = this.items.findById(id); 
-    this.items.splice(itemIndex);
+    const itemIndex = this.items.findIndex(item => item.id === id);
+    this.items.splice(itemIndex, 1);
+    console.log('index:', itemIndex);
 
     // this.items.filter(item => item.id === id);
-   
+    
   };
 
 
