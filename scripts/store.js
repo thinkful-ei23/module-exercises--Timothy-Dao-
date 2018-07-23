@@ -14,7 +14,7 @@ const store = (function() {
   let searchTerm = '';
 
   let findById = function(id) {
-    this.items.find(item => item.id);
+    this.items.find(item => store.item.id);
   };
 
   const addItem = function(name) {
@@ -43,7 +43,7 @@ const store = (function() {
 
   const findAndDelete = function(id) {
     const itemIndex = this.items.findById(id); 
-    this.items.splice(itemIndex);
+    this.items.splice(itemIndex, 1);
 
     // this.items.filter(item => item.id === id);
    
