@@ -13,8 +13,8 @@ const store = (function() {
   let hideCheckedItems = false;
   let searchTerm = '';
 
-  const findById = function(id) {
-    this.items.findIndex(item => item.id === id);
+  let findById = function(id) {
+    this.items.find(item => item.id);
   };
 
   const addItem = function(name) {
@@ -27,8 +27,9 @@ const store = (function() {
   };
 
   const findAndToggleChecked = function(id) {
-    let foundItem = this.findById(id);
-    foundItem.checked = !foundItem.checked;
+    let foundItem = this.items.findById(id);  
+    console.log(foundItem);
+    foundItem.checked = !foundItem.checked; // this is wrong
   };
 
   const findAndUpdateName = function(id, newName) {
@@ -42,15 +43,15 @@ const store = (function() {
 
   const findAndDelete = function(id) {
     const itemIndex = this.items.findById(id); 
-    this.items.splice(itemIndex, 1);
+    this.items.splice(itemIndex);
 
-    // let itemDelete = this.items.filter(item => item.id === id);
-    
-  }
+    // this.items.filter(item => item.id === id);
+   
+  };
 
 
   return {
-    items,
+    items: items,
     hideCheckedItems,
     searchTerm,
     findById,

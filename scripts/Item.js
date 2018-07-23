@@ -1,13 +1,13 @@
-/* global $, cuid */
+/* global $, cuid, store */
 
 
 const Item = (function(){
   
   const validateName = name => {
     if(name === '') {
-     throw new TypeError("Name doesnt exist");
-    };
-  }
+      throw new TypeError('Name doesnt exist');
+    }
+  };
 
   const create = name => {
     return {
@@ -20,7 +20,7 @@ const Item = (function(){
   return {
     validateName: validateName,
     create: create
-  }
+  };
 
 }()
 );
